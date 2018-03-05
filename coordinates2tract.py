@@ -1,13 +1,13 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 #! python3
 
 
-# In[33]:
+# In[2]:
 
 
 import json
@@ -16,14 +16,14 @@ import sys
 import pandas as pd
 
 
-# In[25]:
+# In[3]:
 
 
 path = 'data.csv'
 data = pd.read_csv(path,header = 0)
 
 
-# In[28]:
+# In[ ]:
 
 
 def censusTract(latitude, longitude):
@@ -45,5 +45,8 @@ for i in range(len(data)):
     sys.stdout.write('\rPercentage complete: ' + str((i/len(data))*100) + '%')
     latitude = str(latitudedS.iloc[i])
     longitude = str(longitudedS.loc[i])
-    tract[i] = tract.append(censusTract(latitude,longitude))
+    try:
+        tract[i] = tract.append(censusTract(latitude,longitude))
+    except Exception:
+        tract[i] = tract.append(0)
 
